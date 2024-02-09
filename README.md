@@ -7,3 +7,9 @@
  ```
  $ pip install flask
  ```
+
+ To run do:
+ ```
+ python app.py
+ ```
+ By default, the script will run in debug mode as ``app.run(debug=TRUE)`` flag is set
