@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in/Sign up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            font-size: 12px;
+        }
+       center{
+            color: White;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+      input{
+            border-radius:20px;
+        }
+      
+       input[type="submit"]:hover {
+            background-color: #3373C4;
+        }
+       input[type="submit"] {
+            background-color: #73B9EE;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+      span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign up</h1>
+           <form id="signup_form">
+           <span id="passwordError"></span>  
+           <center><label for="F_name">First name:</label><br>
+           <input type="text" id="F_name" name="F_name" required><br>
+           <label for ="L_name">Last name:</label><br>
+           <input type="text" id="L_name" name="L_name" required><br>
+           <label for="email">Email address:</label><br>
+           <input type="text" id="email" name="email" required><br>
+           <label for="new_pass">New password:</label>
+             <p>Password should be minimum 8 characters</p>
+           <input type="text" id="new_pass" name="new_pass" required><br></center>
+         <p></p>
+           <center><input type="submit" value="Sign up"></center>
+      </form>
+    </div>
+</body>
+  <script src="js/password_src"></script>
+</html>
