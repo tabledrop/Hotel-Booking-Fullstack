@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+            .container {
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+            }
+            p {
+                color: #666;
+                font-size: 18px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Welcome, {{ current_user.username }}!</h2>
+            <h3>Your Reservations:</h3>
+            <ul>
+                {% for reservation in reservations %}
+                <li>
+                    Check-in: {{ reservation.check_in_date }} - Check-out: {{
+                    reservation.check_out_date }} | Guests: {{
+                    reservation.num_guests }}
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('make_reservation') }}">Make a Reservation</a>
+            <br />
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </body>
+</html>

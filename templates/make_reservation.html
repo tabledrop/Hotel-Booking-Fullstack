@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Reservation</title>
+</head>
+<body>
+    <h2>Make a Reservation</h2>
+    <form method="POST" action="{{ url_for('make_reservation') }}">
+        <label for="check_in_date">Check-in Date:</label>
+        <input type="date" name="check_in_date" required>
+        <br>
+        <label for="check_out_date">Check-out Date:</label>
+        <input type="date" name="check_out_date" required>
+        <br>
+        <label for="num_guests">Number of Guests:</label>
+        <input type="number" name="num_guests" required>
+        <br>
+        <button type="submit">Submit Reservation</button>
+    </form>
+    <br>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
+
