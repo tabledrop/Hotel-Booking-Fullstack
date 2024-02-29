@@ -1,4 +1,6 @@
 
+*.iml
+*.xml
 *.db
 *.pyc
 .DS_Store
