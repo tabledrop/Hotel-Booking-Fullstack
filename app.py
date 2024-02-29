@@ -96,25 +96,28 @@ def make_reservation():
         check_in_date_str = request.form['check_in_date']
         check_out_date_str = request.form['check_out_date']
         num_guests = request.form['num_guests']
+        if check_out_date_str < check_in_date_str:
+            flash('Check out date must not be less then Check in date.', 'danger')
+        else:
 
 
-        # Convert date strings to date objects
-        check_in_date = datetime.strptime(check_in_date_str, '%Y-%m-%d').date()
-        check_out_date = datetime.strptime(check_out_date_str, '%Y-%m-%d').date()
+            # Convert date strings to date objects
+            check_in_date = datetime.strptime(check_in_date_str, '%Y-%m-%d').date()
+            check_out_date = datetime.strptime(check_out_date_str, '%Y-%m-%d').date()
 
 
-        reservation = Reservation(
-            user=current_user,
-            check_in_date=check_in_date,
-            check_out_date=check_out_date,
-            num_guests=num_guests
-        )
+            reservation = Reservation(
+                user=current_user,
+                check_in_date=check_in_date,
+                check_out_date=check_out_date,
+                num_guests=num_guests
+            )
 
-        db.session.add(reservation)
-        db.session.commit()
+            db.session.add(reservation)
+            db.session.commit()
 
-        flash('Reservation successful', 'success')
-        return redirect(url_for('dashboard'))
+            flash('Reservation successful', 'success')
+            return redirect(url_for('dashboard'))
 
     return render_template('make_reservation.html')
 

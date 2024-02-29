@@ -64,6 +64,14 @@
         <div class="container">
             <h2>Make a Reservation</h2>
             <form method="POST" action="{{ url_for('make_reservation') }}">
+                {% with messages = get_flashed_messages(with_categories=true) %} {%
+            if messages %}
+            <ul>
+                {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
                 <label for="check_in_date">Check-in Date:</label>
                 <input type="date" name="check_in_date" required />
                 <br />
@@ -71,7 +79,7 @@
                 <input type="date" name="check_out_date" required />
                 <br />
                 <label for="num_guests">Number of Guests:</label>
-                <input type="number" name="num_guests" required />
+                <input type="number" name="num_guests" required min = "1"/>
                 <br />
                 <button type="submit">Submit Reservation</button>
             </form>
