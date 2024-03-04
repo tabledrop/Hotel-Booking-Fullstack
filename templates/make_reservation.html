@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Make Reservation</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+            .container {
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1,
+            h2 {
+                color: #333;
+                text-align: center;
+            }
+            p {
+                color: #666;
+                font-size: 18px;
+                line-height: 1.6;
+            }
+
+            form {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            input[type="date"],
+            input[type="number"],
+            select {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            input[type="submit"] {
+                background-color: #4caf50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+        </style>
+        <script>
+            function update_min_date() {
+                var check_in_date =
+                    document.getElementById("check_in_date").value;
+
+                document.getElementById("check_out_date").min = check_in_date;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Make a Reservation</h2>
+            <form method="POST" action="{{ url_for('make_reservation') }}">
+                <label for="check_in_date">Check-in Date:</label>
+                <input
+                    type="date"
+                    name="check_in_date"
+                    id="check_in_date"
+                    required
+                    min="{{today}}"
+                    onchange="update_min_date()"
+                />
+                <br />
+                <label for="check_out_date">Check-out Date:</label>
+                <input
+                    type="date"
+                    name="check_out_date"
+                    id="check_out_date"
+                    required
+                    min="{{today}}"
+                />
+                <br />
+                <label for="num_guests">Number of Guests:</label>
+                <input type="number" name="num_guests" required min="1" />
+                <br />
+                <button type="submit">Submit Reservation</button>
+            </form>
+            <br />
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+            <br />
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </body>
+</html>
