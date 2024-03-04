@@ -60,6 +60,14 @@
                 background-color: #45a049;
             }
         </style>
+        <script>
+            function update_min_date() {
+                var check_in_date =
+                    document.getElementById("check_in_date").value;
+
+                document.getElementById("check_out_date").min = check_in_date;
+            }
+        </script>
     </head>
     <body>
         <div class="container">
@@ -69,14 +77,17 @@
                 <input
                     type="date"
                     name="check_in_date"
+                    id="check_in_date"
                     required
                     min="{{today}}"
+                    onchange="update_min_date()"
                 />
                 <br />
                 <label for="check_out_date">Check-out Date:</label>
                 <input
                     type="date"
                     name="check_out_date"
+                    id="check_out_date"
                     required
                     min="{{today}}"
                 />
