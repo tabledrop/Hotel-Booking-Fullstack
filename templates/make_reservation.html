@@ -19,7 +19,8 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             }
-            h1, h2 {
+            h1,
+            h2 {
                 color: #333;
                 text-align: center;
             }
@@ -46,7 +47,7 @@
             }
 
             input[type="submit"] {
-                background-color: #4CAF50;
+                background-color: #4caf50;
                 color: white;
                 padding: 14px 20px;
                 margin: 8px 0;
@@ -65,13 +66,23 @@
             <h2>Make a Reservation</h2>
             <form method="POST" action="{{ url_for('make_reservation') }}">
                 <label for="check_in_date">Check-in Date:</label>
-                <input type="date" name="check_in_date" required min="{{today}}"/>
+                <input
+                    type="date"
+                    name="check_in_date"
+                    required
+                    min="{{today}}"
+                />
                 <br />
                 <label for="check_out_date">Check-out Date:</label>
-                <input type="date" name="check_out_date" required />
+                <input
+                    type="date"
+                    name="check_out_date"
+                    required
+                    min="{{today}}"
+                />
                 <br />
                 <label for="num_guests">Number of Guests:</label>
-                <input type="number" name="num_guests" required min = "1"/>
+                <input type="number" name="num_guests" required min="1" />
                 <br />
                 <button type="submit">Submit Reservation</button>
             </form>
