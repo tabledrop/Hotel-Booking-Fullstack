@@ -73,7 +73,7 @@
             </ul>
             {% endif %} {% endwith %}
                 <label for="check_in_date">Check-in Date:</label>
-                <input type="date" name="check_in_date" required />
+                <input type="date" name="check_in_date" required min="{{today}}"/>
                 <br />
                 <label for="check_out_date">Check-out Date:</label>
                 <input type="date" name="check_out_date" required />

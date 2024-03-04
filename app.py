@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_migrate import Migrate 
 from datetime import datetime
+from datetime import date
 
 
 app = Flask(__name__)
@@ -92,6 +93,7 @@ def dashboard():
 @app.route('/make_reservation', methods=['GET', 'POST'])
 @login_required
 def make_reservation():
+    today = date.today()
     if request.method == 'POST':
         check_in_date_str = request.form['check_in_date']
         check_out_date_str = request.form['check_out_date']
@@ -119,7 +121,7 @@ def make_reservation():
             flash('Reservation successful', 'success')
             return redirect(url_for('dashboard'))
 
-    return render_template('make_reservation.html')
+    return render_template('make_reservation.html', today=today)
 
 
 migrate = Migrate(app, db)
