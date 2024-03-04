@@ -63,14 +63,6 @@
     <body>
         <div class="container">
             <h2>Login</h2>
-            {% with messages = get_flashed_messages(with_categories=true) %} {%
-            if messages %}
-            <ul>
-                {% for category, message in messages %}
-                <li class="alert alert-{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %} {% endwith %}
             <form method="POST" action="{{ url_for('login') }}">
                 <label for="username">Username:</label>
                 <input type="text" name="username" required />
@@ -80,9 +72,9 @@
                 <br />
                 <button type="submit">Login</button>
             </form>
-         <form action="/signup" method="get">
-             <button type="submit">Back To Sign up</button>
-         </form>
+            <form action="/signup" method="get">
+                <button type="submit">Back To Sign up</button>
+            </form>
         </div>
     </body>
 </html>

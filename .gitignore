@@ -4,3 +4,8 @@
 *.db
 *.pyc
 .DS_Store
+migrations/versions/5a03f33d874f_.py
+*.ini
+migrations/env.py
+migrations/script.py.mako
+migrations/README
