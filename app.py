@@ -62,6 +62,7 @@ def login():
 from predict import predict_model
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
+    today = date.today()
     if request.method == 'POST':
         # get data from form
         selected_date = request.form['selectedDate']
@@ -85,7 +86,7 @@ def predict():
         predicted_bookings = predict_model(dataframe)
         return redirect(url_for('result', predicted_bookings=predicted_bookings))
 
-    return render_template('predict.html')
+    return render_template('predict.html', today=today)
 
 @app.route('/result', methods=['GET','POST'])
 def result():

@@ -35,7 +35,7 @@
     <div class="container">
         <form method="POST" action="/predict" id="predictionForm">
             <label for="selectedDate">Select Date:</label>
-            <input type="date" id="selectedDate" name="selectedDate" required>
+            <input type="date" id="selectedDate" name="selectedDate" required min="{{today}}">
             <br>
             <label for="season">Season:</label>
             <select name="season" required>
