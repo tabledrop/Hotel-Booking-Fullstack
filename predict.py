@@ -30,4 +30,8 @@ def predict_model(selected_date):
     desired_date = selected_date
     prediction = model.predict(desired_date)
 
-    return prediction
+    # take out [] from the prediction
+    bookings = str(prediction).strip('[]')
+    
+    # return the predicted bookings
+    return bookings
