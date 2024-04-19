@@ -1,11 +1,13 @@
+# imports for web service fullstack
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_migrate import Migrate
 from datetime import datetime
 from datetime import date
+import pandas as pd
 
-
+# Flask init config
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reservations.db'  # SQLite database file
@@ -13,6 +15,7 @@ app.config['SQALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
 
 
 # User model for Flask-Login
@@ -55,6 +58,47 @@ def login():
         else:
             flash('Login failed. Check your username and password.', 'danger')
     return render_template('login.html')
+
+from predict import predict_model
+@app.route('/predict', methods=['GET', 'POST'])
+def predict():
+    if request.method == 'POST':
+        # get data from form
+        selected_date = request.form['selectedDate']
+        season = request.form['season']
+
+        # parse data from form to appropriate Pandas DataFrame
+        selected_date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
+        year = selected_date_obj.year
+        month = selected_date_obj.month
+        day = selected_date_obj.day
+        weekday = selected_date_obj.weekday()
+
+        dataframe = pd.DataFrame({
+            'year': [year],
+            'month': [month],
+            'day': [day],
+            'season': [season],
+            'day_of_week': [weekday]
+            })
+
+        predicted_bookings = predict_model(dataframe)
+        return redirect(url_for('result', predicted_bookings=predicted_bookings))
+
+    return render_template('predict.html')
+
+@app.route('/result', methods=['GET','POST'])
+def result():
+    if request.method == 'POST':
+        year = int(request.form['year'])
+        month = int(request.form['month'])
+        day = int(request.form['day'])
+        season = int(request.form['season'])
+        day_of_week = int(request.form['day_of_week'])
+
+    predicted_bookings = request.args.get('predicted_bookings')
+
+    return render_template('result.html', predicted_bookings=predicted_bookings)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

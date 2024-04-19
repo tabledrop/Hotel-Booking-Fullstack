@@ -9,3 +9,4 @@ migrations/versions/5a03f33d874f_.py
 migrations/env.py
 migrations/script.py.mako
 migrations/README
+/catboost_info

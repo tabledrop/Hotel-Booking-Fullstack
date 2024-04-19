@@ -1,0 +1,47 @@
+<h2>Booking Prediction</h2>
+<form method="POST" action="/predict" id="predictionForm">
+    <label for="selectedDate">Select Date:</label>
+    <input type="date" id="selectedDate" name="selectedDate" required>
+    <br>
+    <label for="season">Season:</label>
+    <select name="season" required>
+        <option value="0">Spring</option>
+        <option value="1">Summer</option>
+        <option value="2">Fall</option>
+        <option value="3">Winter</option>
+    </select>
+    <br>
+
+    <!-- hidden for datatype conversion purposes-->
+    <input type="hidden" id="year" name="year">
+    <input type="hidden" id="month" name="month">
+    <input type="hidden" id="day" name="day">
+
+    <input type="submit" value="Predict">
+</form>
+</div>
+
+<script>
+// Add event listener to the form to intercept submission
+document.getElementById("predictionForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Get the selected date from the date input
+    var selectedDate = new Date(document.getElementById("selectedDate").value);
+
+    // Extract year, month, and day components
+    var year = selectedDate.getFullYear();
+    var month = selectedDate.getMonth() + 1; // Month is zero-based, so add 1
+    var day = selectedDate.getDate();
+
+    // Set the year, month, and day values to hidden fields in the form
+    document.getElementById("year").value = year;
+    document.getElementById("month").value = month;
+    document.getElementById("day").value = day;
+
+    // Submit the form programmatically
+    document.getElementById("predictionForm").submit();
+});
+</script>
+</body>
+</html>
