@@ -1,29 +1,60 @@
+<!doctype html>
+<html lang="en">
 <h1>Booking Prediction</h1>
-<link rel="stylesheet" type="text/css" href="Booking-Style.css">
+    <style>
+        body{
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+           background-color: #f0f0f0;
+        }
+        h1{
+           text-align: center;
+           color: #333;
+        }
+        .container{
+          max-width: 800px;
+          margin: 50px auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label{
+           font-size: 20px
+        }
+        form {
+          margin-top: 20px;
+          text-align: center;
+        }
+        p{
+          font-size: 15px;
+        }
+    </style>
 <body>
-<div class="container">
-    <form method="POST" action="/predict" id="predictionForm">
-        <label for="selectedDate">Select Date:</label>
-        <input type="date" id="selectedDate" name="selectedDate" required>
-        <br>
-        <label for="season">Season:</label>
-        <select name="season" required>
-            <option value="0">Spring</option>
-            <option value="1">Summer</option>
-            <option value="2">Fall</option>
-            <option value="3">Winter</option>
-        </select>
-        <br>
+    <div class="container">
+        <form method="POST" action="/predict" id="predictionForm">
+            <label for="selectedDate">Select Date:</label>
+            <input type="date" id="selectedDate" name="selectedDate" required>
+            <br>
+            <label for="season">Season:</label>
+            <select name="season" required>
+                <option value="0">Spring</option>
+                <option value="1">Summer</option>
+                <option value="2">Fall</option>
+                <option value="3">Winter</option>
+            </select>
+            <br>
 
-        <!-- hidden for datatype conversion purposes-->
-        <input type="hidden" id="year" name="year">
-        <input type="hidden" id="month" name="month">
-        <input type="hidden" id="day" name="day">
+            <!-- hidden for datatype conversion purposes-->
+            <input type="hidden" id="year" name="year">
+            <input type="hidden" id="month" name="month">
+            <input type="hidden" id="day" name="day">
 
-        <input type="submit" value="Predict">
-    </form>
-    <p>Want to go back to the home page?<a href="/">Home</a></p>
-</div>
+            <input type="submit" value="Predict">
+        </form>
+        <p>Want to go back to the home page?<a href="/">Home</a></p>
+    </div>
 
 <script>
 // Add event listener to the form to intercept submission
