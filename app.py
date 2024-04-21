@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_migrate import Migrate
-from datetime import datetime
+from datetime import datetime, timedelta
 from datetime import date
 import pandas as pd
 
@@ -65,23 +65,41 @@ def predict():
     today = date.today()
     if request.method == 'POST':
         # get data from form
-        selected_date = request.form['selectedDate']
-        season = request.form['season']
+        selected_date1 = request.form['firstDate']
+        selected_date2 = request.form['secondDate']
 
         # parse data from form to appropriate Pandas DataFrame
-        selected_date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
-        year = selected_date_obj.year
-        month = selected_date_obj.month
-        day = selected_date_obj.day
-        weekday = selected_date_obj.weekday()
+        selected_date_obj1 = datetime.strptime(selected_date1, '%Y-%m-%d')
+        selected_date_obj2 = datetime.strptime(selected_date2, '%Y-%m-%d')
 
         dataframe = pd.DataFrame({
-            'year': [year],
-            'month': [month],
-            'day': [day],
-            'season': [season],
-            'day_of_week': [weekday]
+            'year': [0],
+            'month': [0],
+            'day': [0],
+            'season': [0],
+            'day_of_week': [0]
             })
+
+        i = 0
+        while selected_date_obj1 != selected_date_obj2 + timedelta(days=1):
+            year = selected_date_obj1.year
+            month = selected_date_obj1.month
+            day = selected_date_obj1.day
+            weekday = selected_date_obj1.weekday()
+            season = 0
+            if month == 12 or month == 1 or month == 2:
+                season = 3
+            elif month == 3 or month == 4 or month == 5:
+                season = 0
+            elif month == 6 or month == 7 or month == 8:
+                season = 1
+            elif month == 9 or month == 10 or month == 11:
+                season = 2
+
+            dataframe.loc[i] = [year, month, day, season, weekday]
+
+            selected_date_obj1 += timedelta(days=1)
+            i += 1
 
         predicted_bookings = predict_model(dataframe)
         return redirect(url_for('result', predicted_bookings=predicted_bookings))

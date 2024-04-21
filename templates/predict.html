@@ -31,19 +31,22 @@
               font-size: 15px;
             }
         </style>
+        <script>
+            function update_min_date() {
+                var firstDate =
+                    document.getElementById("selectedDate").value;
+
+                document.getElementById("selectedDate1").min = firstDate;
+            }
+        </script>
 <body>
     <div class="container">
         <form method="POST" action="/predict" id="predictionForm">
-            <label for="selectedDate">Select Date:</label>
-            <input type="date" id="selectedDate" name="selectedDate" required min="{{today}}">
+            <label for="selectedDate">Select Date 1:</label>
+            <input type="date" id="selectedDate" name="firstDate" required min="{{today}}" onchange="update_min_date()">
             <br>
-            <label for="season">Season:</label>
-            <select name="season" required>
-                <option value="0">Spring</option>
-                <option value="1">Summer</option>
-                <option value="2">Fall</option>
-                <option value="3">Winter</option>
-            </select>
+            <label for="selectedDate1">Select Date 2:</label>
+            <input type="date" id="selectedDate1" name="secondDate" required min="{{today}}">
             <br>
 
             <!-- hidden for datatype conversion purposes-->
