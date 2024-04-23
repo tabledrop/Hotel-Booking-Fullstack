@@ -65,12 +65,15 @@ def predict():
     today = date.today()
     if request.method == 'POST':
         # get data from form
-        selected_date1 = request.form['firstDate']
-        selected_date2 = request.form['secondDate']
+        selected_date1 = datetime.strptime(request.form['firstDate'], '%Y-%m-%d').date()
+        selected_date2 = datetime.strptime(request.form['secondDate'], '%Y-%m-%d').date()
+
+        date_range = [(selected_date1 + timedelta(days=i)).strftime("%A, %B %d") for i in range((selected_date2 - selected_date1).days + 1)]
+        #print(date_range)
 
         # parse data from form to appropriate Pandas DataFrame
-        selected_date_obj1 = datetime.strptime(selected_date1, '%Y-%m-%d')
-        selected_date_obj2 = datetime.strptime(selected_date2, '%Y-%m-%d')
+        selected_date_obj1 = selected_date1
+        selected_date_obj2 = selected_date2
 
         dataframe = pd.DataFrame({
             'year': [0],
@@ -102,22 +105,21 @@ def predict():
             i += 1
 
         predicted_bookings = predict_model(dataframe)
-        return redirect(url_for('result', predicted_bookings=predicted_bookings))
+        return redirect(url_for('result', predicted_bookings=predicted_bookings, date_range=date_range))
 
     return render_template('predict.html', today=today)
 
 @app.route('/result', methods=['GET','POST'])
 def result():
     if request.method == 'POST':
-        year = int(request.form['year'])
-        month = int(request.form['month'])
-        day = int(request.form['day'])
-        season = int(request.form['season'])
-        day_of_week = int(request.form['day_of_week'])
+       selected_date1 = request.form['firstDate']
+       selected_date2 = request.form['secondDate']
 
     predicted_bookings = request.args.get('predicted_bookings')
+    date_range = request.args.get('date_range')
+    predicted_bookings_list = [int(booking) for booking in predicted_bookings.split()]
 
-    return render_template('result.html', predicted_bookings=predicted_bookings)
+    return render_template('result.html', predicted_bookings=predicted_bookings_list, date_range=date_range)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

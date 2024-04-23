@@ -31,7 +31,19 @@
     <body>
         <div class="container">
           <h1>Prediction Result</h1>
-          <p> Estimated bookings on selected date/s: {{ predicted_bookings }} </p>
+          <p> Estimated bookings on selected date/s:</p>
+          <table border="1">
+            <tr>
+                {% for date in date_range %}
+                <td>{{ date }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for booking in predicted_bookings %}
+                    <td>{{ booking }}</td>
+                {% endfor %}
+            </tr>
+          </table>
           <p><a href="/">Home</a></p>
             <p>Want to try another date?<a href="/predict">Predict</a></p>
         </div>

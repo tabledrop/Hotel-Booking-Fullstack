@@ -10,3 +10,4 @@ migrations/env.py
 migrations/script.py.mako
 migrations/README
 /catboost_info
+notes.md
