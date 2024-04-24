@@ -19,6 +19,9 @@
               border-radius: 10px;
               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             }
+            .tcontainer{
+               overflow-x: scroll;
+            }
             p{
               font-size: 15px;
             }
@@ -32,6 +35,7 @@
         <div class="container">
           <h1>Prediction Result</h1>
           <p> Estimated bookings on selected date/s:</p>
+            <div class="tcontainer">
           <table border="1">
             <tr id="dateRow">
                 {% for date in date_range %}
@@ -44,6 +48,7 @@
                 {% endfor %}
             </tr>
           </table>
+            </div>
           <p><a href="/">Home</a></p>
             <p>Want to try another date?<a href="/predict">Predict</a></p>
         </div>
