@@ -69,7 +69,6 @@ def predict():
         selected_date2 = datetime.strptime(request.form['secondDate'], '%Y-%m-%d').date()
 
         date_range = [(selected_date1 + timedelta(days=i)).strftime("%A, %B %d") for i in range((selected_date2 - selected_date1).days + 1)]
-        date_range = ' . '.join(date_range)
         #print(date_range)
         adults = int(request.form['adults'])
 
@@ -119,7 +118,7 @@ def result():
        selected_date2 = request.form['secondDate']
 
     predicted_bookings = request.args.get('predicted_bookings')
-    date_range = request.args.get('date_range')
+    date_range = request.args.getlist('date_range')
     predicted_bookings_list = [int(booking) for booking in predicted_bookings.split()]
 
     return render_template('result.html', predicted_bookings=predicted_bookings_list, date_range=date_range)

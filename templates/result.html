@@ -34,7 +34,9 @@
           <p> Estimated bookings on selected date/s:</p>
           <table border="1">
             <tr id="dateRow">
-                <td>{{ date_range }}</td>
+                {% for date in date_range %}
+                    <td>{{ date }}</td>
+                {% endfor %}
             </tr>
             <tr id="bookngRow">
                 {% for booking in predicted_bookings %}
