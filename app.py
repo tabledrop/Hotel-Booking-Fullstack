@@ -69,7 +69,9 @@ def predict():
         selected_date2 = datetime.strptime(request.form['secondDate'], '%Y-%m-%d').date()
 
         date_range = [(selected_date1 + timedelta(days=i)).strftime("%A, %B %d") for i in range((selected_date2 - selected_date1).days + 1)]
+        date_range = ' . '.join(date_range)
         #print(date_range)
+        adults = int(request.form['adults'])
 
         # parse data from form to appropriate Pandas DataFrame
         selected_date_obj1 = selected_date1
@@ -80,6 +82,7 @@ def predict():
             'month': [0],
             'day': [0],
             'season': [0],
+            'adults': [0],
             'day_of_week': [0]
             })
 
@@ -99,7 +102,7 @@ def predict():
             elif month == 9 or month == 10 or month == 11:
                 season = 2
 
-            dataframe.loc[i] = [year, month, day, season, weekday]
+            dataframe.loc[i] = [year, month, day, season, adults, weekday]
 
             selected_date_obj1 += timedelta(days=1)
             i += 1

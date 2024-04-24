@@ -33,12 +33,10 @@
           <h1>Prediction Result</h1>
           <p> Estimated bookings on selected date/s:</p>
           <table border="1">
-            <tr>
-                {% for date in date_range %}
-                <td>{{ date }}</td>
-                {% endfor %}
+            <tr id="dateRow">
+                <td>{{ date_range }}</td>
             </tr>
-            <tr>
+            <tr id="bookngRow">
                 {% for booking in predicted_bookings %}
                     <td>{{ booking }}</td>
                 {% endfor %}
@@ -48,4 +46,7 @@
             <p>Want to try another date?<a href="/predict">Predict</a></p>
         </div>
     </body>
+
+
+ 
 </html>
